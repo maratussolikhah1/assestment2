@@ -52,6 +52,8 @@
     </table>
     <script>
         $(document).ready(function () {
+            $("#form").validate()
+            $("#maybelline").DataTable()
             $.ajax({
                 url: "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline",
                 type: "GET",
