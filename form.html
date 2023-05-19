@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Assestment 2 Mar'atus Solikhah</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #a9a8a8;
+        }
+
+        th {
+            background-color: #dc7adc;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="body"> 
+        <form action="" method="get" id="form" >
+            <b>Form Validasi Input Data Makeup</b><br>
+            <input type="text" name="id"  placeholder="ID" required/><br>
+            <input type="text" name="brand"  placeholder="Brand" required/><br>
+            <input type="text" name="name"  placeholder="Name" required/><br>
+            <input type="text" name="price"  placeholder="Price" required/><br>
+            
+            <input type="button" value="Submit" onclick="Submit()"/><br>
+            <br>
+        </form>
+    </div>
+    <h1 style="text-align: center;">Makeup brands and product info</h1>
+    <table id="maybelline">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://makeup-api.herokuapp.com/api/v1/products.json?brand=maybelline",
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    $.each(data, function (i, maybelline) {
+                        var row = $("<tr>");
+                        $("<td>").text(maybelline.id).appendTo(row);
+                        $("<td>").text(maybelline.brand).appendTo(row);
+                        $("<td>").text(maybelline.name).appendTo(row);
+                        $("<td>").text(maybelline.price).appendTo(row);
+                        $("#maybelline tbody").append(row);
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+
+</html>
